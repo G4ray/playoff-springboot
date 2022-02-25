@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("/todos")
@@ -25,26 +24,27 @@ public class TodoController {
         return repository.save(todo);
     }
 
-    @GetMapping(value = "/{id}")
-    @ResponseStatus(value = HttpStatus.OK)
-    public Todo getTodo(@PathVariable Long id) {
-        try {
-            return repository.findById(id).orElseThrow(BeanNotFound::new);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     @GetMapping(value = "/")
-    @ResponseStatus(value = HttpStatus.OK)
-    public List<Todo> getTodos() {
-        try {
-            return repository.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public Collection<Todo> getTodos() {
+        return repository.findAll();
     }
 
+    @GetMapping(value = "/{id}")
+    public Todo getTodo(@PathVariable Long id) throws BeanNotFound {
+        return repository.findById(id).orElseThrow(() -> new BeanNotFound());
+    }
+
+    @PutMapping(value = "/{id}")
+    public Todo updateTodo(@PathVariable Long id,@RequestBody Todo todo) throws BeanNotFound {
+        getTodo(id);
+        todo.setId(id);
+        return repository.save(todo);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    @ResponseStatus(value= HttpStatus.NO_CONTENT)
+    public void deleteTodo (@PathVariable Long id) throws BeanNotFound{
+        getTodo(id);
+        repository.deleteById(id);
+    }
 }
