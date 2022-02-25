@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/todos")
+@RequestMapping() // TODO add path API
 public class TodoController {
 
     private final TodoRepository repository;
@@ -21,30 +21,13 @@ public class TodoController {
     @PostMapping(value = "/")
     @ResponseStatus(value= HttpStatus.CREATED)
     public Todo createTodo(@RequestBody Todo todo) {
-        return repository.save(todo);
+        // add to base
+        return null;
     }
 
-    @GetMapping(value = "/")
-    public Collection<Todo> getTodos() {
-        return repository.findAll();
-    }
+    // TODO add getTodos
+    // TODO add getTodoById
+    // TODO add updateTodo
+    // TODO add deleteTodo
 
-    @GetMapping(value = "/{id}")
-    public Todo getTodo(@PathVariable Long id) throws BeanNotFound {
-        return repository.findById(id).orElseThrow(() -> new BeanNotFound());
-    }
-
-    @PutMapping(value = "/{id}")
-    public Todo updateTodo(@PathVariable Long id,@RequestBody Todo todo) throws BeanNotFound {
-        getTodo(id);
-        todo.setId(id);
-        return repository.save(todo);
-    }
-
-    @DeleteMapping(value = "/{id}")
-    @ResponseStatus(value= HttpStatus.NO_CONTENT)
-    public void deleteTodo (@PathVariable Long id) throws BeanNotFound{
-        getTodo(id);
-        repository.deleteById(id);
-    }
 }
