@@ -1,6 +1,0 @@
-com\sfeir\playoffs\todolist\domain\Todo.class
-com\sfeir\playoffs\todolist\TodolistApplication.class
-com\sfeir\playoffs\todolist\controller\TodoController.class
-com\sfeir\playoffs\todolist\exception\BeanNotFound.class
-com\sfeir\playoffs\todolist\exception\RestExceptionHandler.class
-com\sfeir\playoffs\todolist\repository\TodoRepository.class
