@@ -12,9 +12,9 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @ControllerAdvice
 public class RestExceptionHandler {
 
-    @ExceptionHandler(BeanNotFound.class)
-    public ResponseEntity<Object> handleEntityNotFound(
-            BeanNotFound ex) {
-        return new ResponseEntity<>(ex.getMessage(), NOT_FOUND);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<Object> handleEntityNotFound(Exception ex) {
+//        return new ResponseEntity<>("TODO", NOT_FOUND);
+//    }
+
 }
