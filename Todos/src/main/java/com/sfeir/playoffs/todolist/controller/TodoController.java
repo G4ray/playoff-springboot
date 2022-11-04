@@ -10,6 +10,7 @@ public class TodoController {
 
     public TodoController() {}
 
+    @PostMapping
     public Todo createTodo(@RequestBody Todo todo) {
         return null;
     }
